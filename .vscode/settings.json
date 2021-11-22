@@ -1,0 +1,10 @@
+{
+	"workbench.colorCustomizations": {
+		"[SynthWave '84]": {
+			"editorIndentGuide.background": "#ddd2d29c",
+			"debugToolBar.background": "#4d3268",
+			"tab.border": "#a58fa70f",
+			"tab.lastPinnedBorder": "#cdc724"
+		}
+	}
+}
