@@ -29,7 +29,6 @@
 	onMount(() => {
 		const loader = new STLLoader();
 		loader.load('/model.stl', function (g) {
-			// scene.add( new THREE.Mesh( g ) );
 			geometry = g;
 		});
 	});
@@ -54,14 +53,6 @@
 		/>
 	</SC.Group>
 
-	<!-- <SC.Mesh
-		geometry={new THREE.BoxGeometry()}
-		material={new THREE.MeshStandardMaterial({ color: 0xff3e00 })}
-		scale={[width, height, depth]}
-		rotation={[0, spin, 0]}
-		castShadow
-	/> -->
-
 	{#if geometry}
 		<SC.Group rotation={[0, spin, 0]} position={[0, 0.6, 0]}>
 			<SC.Mesh
@@ -72,6 +63,16 @@
 				castShadow
 			/>
 		</SC.Group>
+	{:else}
+	<SC.Group>
+		<SC.Mesh
+		geometry={new THREE.BoxGeometry()}
+		material={new THREE.MeshStandardMaterial({ color: 0xff3e00 })}
+		scale={[width, height, depth]}
+		rotation={[0, spin, 0]}
+		castShadow
+		/>
+	</SC.Group>
 	{/if}
 
 	<SC.PerspectiveCamera position={[1, 1, 3]} />
