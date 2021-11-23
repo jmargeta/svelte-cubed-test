@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@compai/font-recursive': ^0.0.2
   '@fontsource/fira-mono': ^4.5.0
   '@lukeed/uuid': ^2.0.0
   '@sveltejs/adapter-vercel': next
@@ -23,6 +24,7 @@ specifiers:
   typescript: ^4.4.3
 
 dependencies:
+  '@compai/font-recursive': 0.0.2
   '@fontsource/fira-mono': 4.5.0
   '@lukeed/uuid': 2.0.0
   cookie: 0.4.1
@@ -67,6 +69,10 @@ packages:
       chalk: 2.4.2
       js-tokens: 4.0.0
     dev: true
+
+  /@compai/font-recursive/0.0.2:
+    resolution: {integrity: sha512-3vID/zTk1KI/+ccnk2GKUZaceiITn3HRANagBYjXTjqVH8PrzgCs0QWvNSt6sRT+4fOiVWsa3sdCt7OfdIi+9g==}
+    dev: false
 
   /@eslint/eslintrc/0.4.3:
     resolution: {integrity: sha512-J6KFFz5QCYUJq3pf0mjEcCJVERbzv71PUIDczuh9JkwGEzced6CO5ADLHB1rbf/+oPBtoPfMYNOpGDzCANlbXw==}

@@ -1,13 +1,19 @@
 <script>
-	import * as THREE from 'three';
-	import * as SC from 'svelte-cubed';
-	import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
+	import typefaceData from '@compai/font-recursive/data/typefaces/normal-400.json';
 	import { onMount } from 'svelte';
+	import * as SC from 'svelte-cubed';
+	import * as THREE from 'three';
+	import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
+	import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
+	import { STLLoader } from 'three/examples/jsm/loaders/STLLoader.js';
+
 	let width = 1;
 	let height = 1;
 	let depth = 1;
 
 	let spin = 0;
+	const fontLoader = new FontLoader();
+	let font = fontLoader.parse(typefaceData);
 
 	SC.onFrame(() => {
 		spin += 0.01;
@@ -25,13 +31,24 @@
 		clearcoatRoughness: 0.25
 	});
 
-
 	onMount(() => {
 		const loader = new STLLoader();
 		loader.load('/model.stl', function (g) {
 			geometry = g;
 		});
 	});
+
+	$: createText = (/** @type {string} */ str) => {
+		if (!font) return;
+		const textGeometry = new TextGeometry(str, {
+			font,
+			size: 5,
+			height: 0.25,
+			curveSegments: 12
+		});
+		textGeometry.center();
+		return textGeometry;
+	};
 </script>
 
 <SC.Canvas
@@ -64,15 +81,23 @@
 			/>
 		</SC.Group>
 	{:else}
-	<SC.Group>
-		<SC.Mesh
-		geometry={new THREE.BoxGeometry()}
-		material={new THREE.MeshStandardMaterial({ color: 0xff3e00 })}
-		scale={[width, height, depth]}
-		rotation={[0, spin, 0]}
-		castShadow
-		/>
-	</SC.Group>
+		<SC.Group>
+			<SC.Mesh
+				geometry={new THREE.BoxGeometry()}
+				material={new THREE.MeshStandardMaterial({ color: 0xff3e00 })}
+				scale={[width, height, depth]}
+				rotation={[0, spin, 0]}
+				castShadow
+			/>
+			<SC.Mesh
+				geometry={createText('loading...')}
+				{material}
+				position={[0, 0, 1]}
+				scale={[0.1, 0.1, 0.1]}
+				rotation={[0, 0, 0]}
+				castShadow
+			/>
+		</SC.Group>
 	{/if}
 
 	<SC.PerspectiveCamera position={[1, 1, 3]} />
